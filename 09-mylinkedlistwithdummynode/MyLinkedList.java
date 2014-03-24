@@ -23,7 +23,7 @@ public class MyLinkedList{
 	while (temp.getNext() != null){
 	    temp = temp.getNext();
 	}
-	temp.setNext(add);//works no matter what is in the array
+	temp.setNext(add);//adds to the end
     }
 
     public void add(int i, String s){
