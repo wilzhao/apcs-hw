@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class RPN{
 
-    //Didn't have any time to attempt writing this class
     private MyStackArray S;
     
     public RPN(){
@@ -30,7 +29,7 @@ public class RPN{
 		}
 		S.push(temp);
 	    }
-	    System.out.println(S);
+	    //    System.out.println(S);
 	}
 	return S.pop();
 	
