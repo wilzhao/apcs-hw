@@ -3,17 +3,37 @@ import java.util.Scanner;
 public class RPN{
 
     //Didn't have any time to attempt writing this class
-    private MyStack S;
+    private MyStackArray S;
     
-    public RPN{
-	S = new MyStack();
+    public RPN(){
+	S = new MyStackArray();
     }
     
-    public int parse(String str){
+    public double parse(String str){
 	Scanner scan = new Scanner(str);
-	//for (int x = 0; x < str.length();x++){
-	//  if ((int)str.charAt(x) 
-	//}
+
+	while (scan.hasNextLine()){
+	    String line = scan.nextLine();
+	    try{
+		double d = Double.parseDouble(line);
+		S.push(d);
+	    } catch (NumberFormatException E){
+		double temp = 0;
+		if (line.equals("+")){
+		    temp = S.pop() + S.pop();
+		} else if (line.equals("-")){
+		    temp = S.pop() - S.pop();
+		} else if (line.equals("/")){
+		    temp = S.pop()/S.pop();
+		} else if (line.equals("*")){
+		    temp = S.pop()*S.pop();
+		}
+		S.push(temp);
+	    }
+	    System.out.println(S);
+	}
+	return S.pop();
+	
     }
 
 }
