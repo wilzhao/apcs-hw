@@ -38,29 +38,48 @@ public class myHeap{
 
 	}
 
-	public void removeMax(){
+	private int max(int a, int b){
+		if (values[a] > values[b]){
+			return a;
+		}
+		return b;
+	}
+
+	public int removeMax(){
+		int ret = values[1];
 		values[1] = values[nextIndex - 1];
 		if (nextIndex == 2){
 			values[1] = 0;
 			nextIndex = 1;
 		}
 		int index = 1;
-		while (index * 2 < values.length && (values[index] < values[index*2] || values[index] < values[index*2 + 1])){
-			if (values[index] < values[index*2]){
-				int temp = values[index*2];
-				values[index*2] = values[index];
-				values[index] = temp;
-				index = index*2;
+		while (index * 2 < nextIndex){
+			//(values[index] < values[index*2] || values[index] < values[index*2 + 1])){
+			int leftIndex = index*2;
+			int rightIndex = index*2 + 1;
+			if (rightIndex >= nextIndex){
+				if (values[index] < values[leftIndex]){
+					int temp = values[leftIndex];
+					values[leftIndex] = values[index];
+					values[index] = temp;
+					index = leftIndex;
+				} else {
+					index = nextIndex;
+				}
 			} else {
-				int temp = values[index*2-1];
-				values[index*2-1] = values[index];
-				values[index] = temp;
-				index = index*2 - 1;
+				int largerIndex = max(leftIndex,rightIndex);
+				if (values[index] < values[largerIndex]){
+					int temp = values[largerIndex];
+					values[largerIndex] = values[index];
+					values[index] = temp;
+					index = largerIndex;
+				} else {
+					index = nextIndex;
+				}
 			}
-
 		}
-		
 		nextIndex--;
+		return ret;
 	}
 
 
